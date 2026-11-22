@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Farm PBL Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span aria-hidden="true">🌾</span>
+      <div><h1 id="title">Smart Farm PBL Studio</h1><p class="sub">Project-based learning and design thinking for AI in smart agriculture</p></div>
+    </div>
+    <div class="actions">
+      <label class="team">Team <select id="teamSel"></select></label>
+      <button id="newTeam" type="button">+ Team</button>
+      <button id="facBtn" type="button" class="ghost">Facilitator view</button>
+    </div>
+  </header>
+
+  <nav id="nav" class="nav" aria-label="Workshop phases"></nav>
+
+  <main id="main" class="main"></main>
+
+  <footer class="foot no-print">
+    <button id="exportMd" type="button" class="ghost">Download team report (.md)</button>
+    <button id="exportJson" type="button" class="ghost">Save team file (.json)</button>
+    <label class="ghost btnlike">Load team file<input id="importJson" type="file" accept=".json" hidden></label>
+    <button id="printBtn" type="button" class="ghost">Print / PDF</button>
+    <span class="hint">Work is saved automatically in this browser.</span>
+  </footer>
+
+  <script src="phases.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

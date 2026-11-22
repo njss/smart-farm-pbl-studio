@@ -1,0 +1,166 @@
+// Workshop content. Facilitators: edit this file to change the day.
+// Field types: text, textarea, list (one item per line), table (rows x columns), vote (ideas with dot votes), rating (1-4 self-assessment).
+window.STUDIO = {
+  title: "Smart Farm PBL Studio",
+  drivingQuestion:
+    "How might we help smallholder farmers in our region use real-time sensor data and AI to make better decisions about water, crops and climate risk?",
+  apps: {
+    twin: "https://smart-farm-twin.vercel.app",
+    chatbot: "https://smart-farm-chatbot.vercel.app",
+    sensors: "https://github.com/njss/smart-farm-sensors",
+  },
+  agenda: [
+    { time: "09:00", min: 30, phase: "launch" },
+    { time: "09:30", min: 60, phase: "empathise" },
+    { time: "10:30", min: 15, label: "Break" },
+    { time: "10:45", min: 45, phase: "define" },
+    { time: "11:30", min: 45, phase: "data" },
+    { time: "12:15", min: 60, label: "Lunch" },
+    { time: "13:15", min: 45, phase: "ideate" },
+    { time: "14:00", min: 75, phase: "prototype" },
+    { time: "15:15", min: 15, label: "Break" },
+    { time: "15:30", min: 45, phase: "test" },
+    { time: "16:15", min: 45, phase: "pitch" },
+  ],
+  phases: [
+    {
+      id: "launch", icon: "🚀", name: "Launch", dt: "PBL entry event",
+      goal: "Meet the driving question, form teams and agree how you will work.",
+      activities: [
+        "Watch the live digital twin of the demo farm. What is happening to the soil and the plants?",
+        "Read the driving question together and write down what you already know and what you need to know.",
+        "Choose team roles. Every role is shared work, but one person keeps an eye on each.",
+      ],
+      links: ["twin"],
+      fields: [
+        { id: "team", type: "text", label: "Team name" },
+        { id: "roles", type: "table", fixed: true, label: "Team roles", columns: ["Role", "Name"],
+          rows: [["Facilitator (time and process)", ""], ["Farmer voice (keeps the user at the centre)", ""], ["Data lead (sensors and data)", ""], ["Tech lead (chatbot and code)", ""], ["Storyteller (pitch and documentation)", ""]] },
+        { id: "know", type: "list", label: "What do we already know?" },
+        { id: "need", type: "list", label: "What do we need to find out? (need-to-know list)" },
+        { id: "agreement", type: "textarea", label: "Team agreement: how will we decide, share work and give feedback?" },
+      ],
+      deliverable: "Team roles, need-to-know list, team agreement",
+    },
+    {
+      id: "empathise", icon: "👩🏾‍🌾", name: "Empathise", dt: "Design thinking 1",
+      goal: "Understand a real farmer: their crops, decisions, constraints and how they get information today.",
+      activities: [
+        "Interview a farmer, an extension officer or a team member who grew up on a farm (15 minutes). Ask about the last bad season.",
+        "Build a persona from what you heard. Use facts, not guesses.",
+        "Map one farming day: which decisions does the farmer make, and what information do they use?",
+      ],
+      fields: [
+        { id: "persona", type: "table", fixed: true, label: "Farmer persona", columns: ["Question", "Answer"],
+          rows: [["Name and age", ""], ["Location and land size", ""], ["Main crops", ""], ["Water source (rain, well, river, tank)", ""], ["Phone (basic, smartphone, shared)", ""], ["Languages and reading level", ""], ["Where they get advice today", ""]] },
+        { id: "pains", type: "list", label: "Pains: what goes wrong, what worries them?" },
+        { id: "gains", type: "list", label: "Gains: what would success look like for them?" },
+        { id: "decisions", type: "table", label: "Daily decisions", columns: ["Decision", "When", "Information used today"], rows: [["", "", ""], ["", "", ""], ["", "", ""]] },
+        { id: "quotes", type: "list", label: "Memorable quotes from the interview" },
+      ],
+      deliverable: "Persona and decision map",
+    },
+    {
+      id: "define", icon: "🎯", name: "Define", dt: "Design thinking 2",
+      goal: "Turn what you learned into one clear problem worth solving.",
+      activities: [
+        "Cluster the pains on sticky notes. Which cluster matters most to your persona?",
+        "Write a point-of-view statement, then turn it into How Might We questions.",
+        "Agree how you will know your solution works.",
+      ],
+      fields: [
+        { id: "pov", type: "textarea", label: "Point of view: [Persona] needs a way to [need] because [insight].",
+          placeholder: "Mama Neema needs a way to know when to irrigate her tomatoes because she loses water and money watering on a fixed schedule." },
+        { id: "hmw", type: "list", label: "How might we …? (write at least five)" },
+        { id: "success", type: "list", label: "Success criteria: how will we know it works for the farmer?" },
+      ],
+      deliverable: "Problem statement and success criteria",
+    },
+    {
+      id: "data", icon: "📡", name: "Explore the data", dt: "AI competency: data",
+      goal: "Connect the farmer's decisions to the sensor data and think about what AI can and cannot do with it.",
+      activities: [
+        "Open the digital twin and the chatbot. Switch the simulator to drought, then heavy rain. What changes?",
+        "Log 10 minutes of data with logger.py and plot soil moisture against time in Python.",
+        "For each farmer decision, decide which sensor helps, and what is still missing.",
+        "Discuss data ethics: who owns the farm's data, who can see it, and what if the sensor is wrong?",
+      ],
+      links: ["twin", "chatbot", "sensors"],
+      fields: [
+        { id: "mapping", type: "table", label: "Decision to data map", columns: ["Farmer decision", "Sensor(s) that help", "Data still missing"],
+          rows: [["When to irrigate", "Soil moisture, rainfall", ""], ["Disease risk", "Air humidity, temperature", ""], ["", "", ""]] },
+        { id: "observations", type: "list", label: "What did you observe in the twin and the data?" },
+        { id: "ethics", type: "textarea", label: "Data ethics: our rules for collecting and using farm data" },
+      ],
+      deliverable: "Decision to data map and data ethics rules",
+    },
+    {
+      id: "ideate", icon: "💡", name: "Ideate", dt: "Design thinking 3",
+      goal: "Generate many ideas, then choose one to prototype today.",
+      activities: [
+        "Crazy 8s: everyone sketches 8 ideas in 8 minutes. Quantity beats quality.",
+        "Share ideas, add them below, and dot-vote (3 votes each).",
+        "For the winning idea, decide what kind of AI it needs: rules, a trained model, a language model, or a mix.",
+      ],
+      fields: [
+        { id: "ideas", type: "vote", label: "Ideas (click the dots to vote)" },
+        { id: "chosen", type: "textarea", label: "Our chosen idea in one sentence" },
+        { id: "ai", type: "table", label: "Which AI does each part need?", columns: ["Part of the idea", "Rules / trained model / language model", "Why"],
+          rows: [["", "", ""], ["", "", ""]] },
+      ],
+      deliverable: "Chosen idea and AI approach",
+    },
+    {
+      id: "prototype", icon: "🛠️", name: "Prototype", dt: "Design thinking 4",
+      goal: "Build a quick, testable version: a conversation design, adapted advice rules, and the interface the farmer will use.",
+      activities: [
+        "Write three short conversations between your persona and the chatbot, in English and Swahili.",
+        "Fork the chatbot repo and adapt the crop thresholds and advice in api/_advisor.py with what you learned.",
+        "Decide the channel: web page, WhatsApp, SMS or voice? Sketch it on paper.",
+        "Optional: create a 3D model of your device or farm feature (for example with Beestoon) and drop it into the twin.",
+      ],
+      links: ["chatbot", "twin"],
+      fields: [
+        { id: "dialogues", type: "textarea", label: "Three sample conversations (Farmer: … / Bot: …)", rows: 10 },
+        { id: "rules", type: "table", label: "Advice rules we changed or added", columns: ["If (sensor condition)", "Then (advice)", "Source (who told us)"],
+          rows: [["", "", ""], ["", "", ""]] },
+        { id: "channel", type: "textarea", label: "Channel and interface: how does the farmer reach the advice?" },
+        { id: "repo", type: "text", label: "Link to our forked repo or deployed app" },
+      ],
+      deliverable: "Working prototype link and conversation design",
+    },
+    {
+      id: "test", icon: "🧪", name: "Test", dt: "Design thinking 5",
+      goal: "Put the prototype in front of someone who plays the farmer, and learn.",
+      activities: [
+        "Swap with another team: they play your persona and use your prototype without help.",
+        "Watch, do not explain. Write down where they hesitate.",
+        "Fill in the feedback grid, then choose one change to make now.",
+      ],
+      fields: [
+        { id: "grid", type: "table", label: "Feedback grid", columns: ["What worked", "What to change", "Questions raised", "New ideas"], rows: [["", "", "", ""], ["", "", "", ""]] },
+        { id: "change", type: "textarea", label: "The one change we made after testing" },
+      ],
+      deliverable: "Feedback grid and one improvement",
+    },
+    {
+      id: "pitch", icon: "🎤", name: "Pitch & reflect", dt: "PBL public product",
+      goal: "Share your solution in three minutes and reflect on what you learned about AI.",
+      activities: [
+        "Prepare a 3-minute pitch: farmer, problem, solution demo, evidence from testing, next step.",
+        "Pitch to the room. Other teams give one 'I like' and one 'I wonder'.",
+        "Rate your own AI competencies, alone, then compare as a team.",
+      ],
+      fields: [
+        { id: "pitch", type: "table", fixed: true, label: "Pitch canvas", columns: ["Part", "What we will say"],
+          rows: [["The farmer (persona)", ""], ["The problem", ""], ["Our solution (demo)", ""], ["Evidence from testing", ""], ["Next step and who we need", ""]] },
+        { id: "competency", type: "rating", label: "AI competency self-assessment (1 = beginner, 4 = can teach others)",
+          items: ["I can explain how sensor data becomes advice in our chatbot", "I can judge when rules, a trained model or a language model fits a problem",
+                  "I can identify ethical risks of AI and data for farmers", "I can design an AI tool together with its users",
+                  "I can modify and deploy code for an AI application"] },
+        { id: "reflection", type: "textarea", label: "What surprised us, and what would we do differently?" },
+      ],
+      deliverable: "Pitch and competency reflection",
+    },
+  ],
+};
