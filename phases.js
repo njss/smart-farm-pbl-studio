@@ -6,7 +6,7 @@ window.STUDIO = {
     "How might we help smallholder farmers in our region use real-time sensor data and AI to make better decisions about water, crops and climate risk?",
   apps: {
     twin: "https://smart-farm-twin.vercel.app",
-    chatbot: "https://smart-farm-chatbot.vercel.app",
+    chatbot: "https://smart-farm-chatbot-six.vercel.app",
     sensors: "https://github.com/njss/smart-farm-sensors",
   },
   agenda: [
